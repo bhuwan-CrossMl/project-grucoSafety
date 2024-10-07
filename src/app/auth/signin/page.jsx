@@ -213,7 +213,7 @@ export default function Page() {
 
               
               <CustomLabelTypography>Password</CustomLabelTypography>
-              <Link href="/forgot-password" variant="body1" color="#0F172A">
+              <Link href="/auth/forgot-password" variant="body1" color="#0F172A">
                 Forgot your password?
               </Link>
               </Stack>

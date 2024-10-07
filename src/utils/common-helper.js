@@ -92,39 +92,28 @@ import {
       alignSelf: "stretch",
       borderRadius: "4px", // Add the border-radius property
       // border: '1px solid #003D4C', // Input border style
-      background: "FFFFFF", // Input background color
-    },
-    "& input.Mui-disabled": {
-      backgroundColor: "#F2F2F2",
-    },
-    "& .MuiInputBase-input.Mui-disabled": {
-      WebkitTextFillColor: "#00191F",
-    },
-  }));
-  
-  const CustomTextFieldShadow = styled(TextField)(({ theme }) => ({
-    "& .MuiOutlinedInput-input": {
-      padding: "12px 16px", // Input padding
-      display: "flex",
-      alignItems: "center",
-      gap: "8px", // Spacing between input and icon
-      alignSelf: "stretch",
-      borderRadius: "4px", // Add the border-radius property
-      // border: '1px solid #003D4C', // Input border style
       background: "#FFFFFF", // Input background color
       transition: "box-shadow 0.3s", // Add transition for smooth effect
-  
+ 
       "&:focus": {
         outline: "none",
         // boxShadow: "0px 0px 0px 4px #CCD8DB",
       },
     },
-    "&:focus-within": {
-      borderRadius: "4px",
-      border: "1px solid var(--brand-colours-primary-500, #003D4C)",
-      background: "var(--contextual-colours-white, #FFF)",
-      boxShadow: "0px 0px 0px 4px #CCD8DB",
+    "& input.Mui-disabled": {
+      backgroundColor: "#F2F2F2",
     },
+    // "& .MuiInputBase-input.Mui-disabled": {
+    //   WebkitTextFillColor: "#00191F",
+    // },
+     //** show box show on focus */
+    // "&:focus-within": {
+    //   borderRadius: "4px",
+    //   border: "1px solid var(--brand-colours-primary-500, #003D4C)",
+    //   background: "var(--contextual-colours-white, #FFF)",
+    //   boxShadow: "0px 0px 0px 4px #CCD8DB",
+    // },
+    
     // Conditional styling based on error
     ...(theme) => ({
       ...(theme?.props?.hasError && {
@@ -441,7 +430,6 @@ import {
     CustomButtonLabelForShort,
     CustomButtonShort,
     CustomTableHeaderTitle,
-    CustomTextFieldShadow,
     CustomAuthErrorStack,
     CustomLightColorTypography,
     CustomModalPHeading,
