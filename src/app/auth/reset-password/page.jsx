@@ -102,7 +102,7 @@ export default function Page() {
   return (
     <Provider store={store}>
       <AuthLayout>
-        {!showInvalidPage ? (
+        {showInvalidPage ? (
           <Box sx={{maxWidth: "384px",borderRadius:"10px" ,p:"24px" , boxShadow:
             "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px", }}>
             <Box
