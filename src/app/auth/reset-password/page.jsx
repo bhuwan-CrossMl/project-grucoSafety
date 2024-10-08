@@ -12,6 +12,7 @@ import {
   CircularProgress,
   Link,
   Tooltip,
+  Button
 } from "@mui/material";
 import {
   ErrorOutline,
@@ -29,7 +30,7 @@ import {
   CustomAuthCard,
   CustomTitle,
   CustomLabelTypography,
-  CustomTextFieldShadow,
+  CustomTextField,
   CustomButtonLabel,
   CustomButton,
   CustomAuthErrorStack,
@@ -101,8 +102,9 @@ export default function Page() {
   return (
     <Provider store={store}>
       <AuthLayout>
-        {showInvalidPage ? (
-          <CustomAuthCard sx={{ marginTop: "129px", width: "100%" }}>
+        {!showInvalidPage ? (
+          <Box sx={{maxWidth: "384px",borderRadius:"10px" ,p:"24px" , boxShadow:
+            "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px", }}>
             <Box
               sx={{
                 display: "flex",
@@ -126,67 +128,77 @@ export default function Page() {
               <CustomTitle>Invalid Link</CustomTitle>
             </Box>
 
-            <CardContent sx={{ padding: 0, paddingBottom: "0 !important" }}>
+            <Box >
               <Typography variant="body1">
                 `Apologies, the link is either not found or expired. For
                 assistance, contact`{" "}
-                <Link href="mailto:support@gtms.ca" variant="body1">
-                  OneStone Support.
+                <Link href="mailto:support@gruco.com" variant="body1">
+                Support.
                 </Link>{" "}
               </Typography>
               <CustomButton
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={() => navigate("/signin")}
+                onClick={() => router.push("/auth/signin")}
               >
                 <CustomButtonLabel>Sign In</CustomButtonLabel>
               </CustomButton>
-            </CardContent>
-          </CustomAuthCard>
+            </Box>
+          </Box>
         ) : (
           <>
             {!paswordSuccess ? (
-              <CustomAuthCard
+                  <form noValidate onSubmit={formik.handleSubmit}>
+              <Box
                 sx={{
-                  marginTop: "45px", // Add the top margin here (adjust the value as needed)
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap:"16px",
+                  marginTop: "45px", 
                   maxWidth: "384px",
+                  minWidth: "384px",
+                  p:"24px",
+                  boxShadow:
+                  "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+                  borderRadius: "10px",
                 }}
               >
-                <Backdrop
-                  sx={{
-                    color: "#fff",
-                    zIndex: (theme) => theme.zIndex.drawer + 1,
-                  }}
-                  open={isSubmitting === true}
-                >
-                  <CircularProgress color="inherit" />
-                </Backdrop>
-                <CardHeader
-                  sx={{ padding: "0px" }}
-                  title={<CustomTitle>Password Reset</CustomTitle>}
-                />
-                <CardContent
-                  sx={{
-                    padding: 0,
-                    paddingBottom: "0 !important",
-                    maxWidth: "433px",
-                  }}
-                >
+              
+
+                     <Typography variant="h1">Password Reset</Typography>
+            
                   <Typography variant="body1">
-                  Enter your email to confirm.
+                    Enter your email to confirm.
                   </Typography>
                   {toastError && (
                     <Box>
                       <ErrorToast toastError={toastError} />
                     </Box>
                   )}
-                  <form noValidate onSubmit={formik.handleSubmit}>
+                
+                    <Stack spacing={1} mt={2}>
+                      <CustomLabelTypography>Email</CustomLabelTypography>
+                      <CustomTextField
+                        fullWidth
+                        id="email"
+                        name="email"
+                        variant="outlined"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                        error={!!(formik.touched.email && formik.errors.email)}
+                        onBlur={formik.handleBlur}
+                        type="email"
+                        placeholder="m@example.com"
+                        disabled={true}
+                      />
+                    </Stack>
+
                     <Stack spacing={1} mt={2}>
                       <CustomLabelTypography>
                         New password
                       </CustomLabelTypography>
-                      <CustomTextFieldShadow
+                      <CustomTextField
                         fullWidth
                         id="new_password"
                         name="new_password"
@@ -287,6 +299,7 @@ export default function Page() {
                                 : "#797979", // Change to dark gray for the starting text
                               padding: "4px 8px",
                               borderRadius: "4px",
+                              mt:"10px"
                             }}
                           >
                             {value ? (
@@ -327,7 +340,7 @@ export default function Page() {
                       <CustomLabelTypography>
                         Confirm password
                       </CustomLabelTypography>
-                      <CustomTextFieldShadow
+                      <CustomTextField
                         fullWidth
                         id="confirm_password"
                         name="confirm_password"
@@ -400,12 +413,13 @@ export default function Page() {
                         )}
                     </Stack>
 
-                    <CustomButton type="submit" fullWidth variant="contained">
-                      <CustomButtonLabel>Reset</CustomButtonLabel>
+                    <CustomButton type="submit" fullWidth variant="contained" >
+                      Reset
                     </CustomButton>
-                  </form>
-                </CardContent>
-              </CustomAuthCard>
+                
+            
+              </Box>
+              </form>
             ) : (
               <CustomAuthCard sx={{ marginTop: "129px", maxWidth: "384px" }}>
                 <Box

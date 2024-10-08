@@ -28,7 +28,7 @@ import * as Yup from "yup";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import { useRouter } from 'next/navigation'; 
 import {
-  CustomTextFieldShadow,
+  CustomTextField,
   CustomLabelTypography,
   CustomButtonLabel,
   CustomTypography,
@@ -50,26 +50,6 @@ import RootLayout from "@/components/layouts/RootLayout";
 import store from '@/store/store';
 import { Provider } from 'react-redux';
 
-
-// CSS for FormControlLabel
-const formControlLabelStyles = {
-  display: "flex",
-  // Padding for top and bottom is 12px, left and right is 0px
-  padding: "12px 12px",
-  alignItems: "center",
-  gap: "8px", // Spacing between Checkbox and label
-  alignSelf: "stretch",
-  marginTop: "16px",
-  marginBottom: "24px;",
-};
-// CSS for Checkbox
-const checkboxStyles = {
-  width: "16px",
-  height: "16px",
-  borderRadius: "2px",
-  padding: "7px",
-  border: "1px solid #A1A1A1", // Custom border color
-};
 
 export default function Page() {
   const router = useRouter();
@@ -95,66 +75,7 @@ export default function Page() {
         .matches(EMAIL_REGEX, commonValidationMessages?.email),
       password: Yup.string().required(commonValidationMessages?.password),
     }),
-    onSubmit: async (values, { setErrors }) => {
-      try {
-        // Checking if reCAPTCHA is verified
-        if (!isVerified) {
-          setIsSubmitting(false);
-          return;
-        }
-        setIsSubmitting(true);
-        setTokenVerificationError("");
-
-        const recaptchaResponse = await verifyRecaptcha(values);
-
-        if (!(recaptchaResponse?.status === 200)) {
-          // reCAPTCHA verification failed
-          setIsSubmitting(false);
-          setTokenVerificationError("reCAPTCHA verification failed.");
-          return;
-        }
-        const response = await signInCall(values, language_code);
-
-        if (response?.status === 200) {
-          // toast.success(response?.data?.message);
-          SucessToast({ message: response?.data?.message });
-          localStorage.setItem("token", response?.data?.data?.token);
-          localStorage.setItem(
-            "languageCode",
-            response?.data?.data?.preferred_language?.key
-          );
-          localStorage.setItem(
-            "displayLanguage",
-            response?.data?.data?.preferred_language?.value
-          );
-          setIsSubmitting(false);
-          router.push('/dashboard');
-        } else {
-          setIsSubmitting(false);
-        }
-      } catch (error) {
-        // Handle network errors or any other exceptions here
-        if (!error?.response?.data) {
-          // toast.error("An error occured while signing in. Please try again later.")
-          setToastError(commonValidationMessages?.signInError);
-        }
-        setIsSubmitting(false);
-        if (error?.response?.data?.status_code !== 401) {
-          setToastError(error?.response?.data?.message);
-        }
-
-        const errors = {};
-        // Check if the error response contains data for the "email" field
-        if (error?.response?.data?.data?.email?.error) {
-          errors.email = error.response.data.data.email.error;
-        }
-
-        // Check if the error response contains data for the "password" field
-        if (error?.response?.data?.data?.password?.error) {
-          errors.password = error.response.data.data.password.error;
-        }
-        setErrors(errors);
-      }
+    onSubmit: async () => {
     },
   });
 
@@ -183,7 +104,7 @@ export default function Page() {
               <CustomLabelTypography>
                 Email address
               </CustomLabelTypography>
-              <CustomTextFieldShadow
+              <CustomTextField
                 fullWidth
                 id="email"
                 name="email"
@@ -217,7 +138,7 @@ export default function Page() {
                 Forgot your password?
               </Link>
               </Stack>
-              <CustomTextFieldShadow
+              <CustomTextField
                 fullWidth
                 id="password"
                 name="password"

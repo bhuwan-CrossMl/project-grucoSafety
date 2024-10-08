@@ -179,7 +179,7 @@ import {
     gap: "8px", // Spacing between text and icon
     alignSelf: "stretch",
     borderRadius: "4px", // Button border radius
-    background: "#003D4C", // Button background color
+    background: "#0F172A", // Button background color
     marginTop: "24px", // Margin space at the top
   }));
   

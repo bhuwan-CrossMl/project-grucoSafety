@@ -28,7 +28,7 @@ import {
   CustomTextFieldShadow,
   CustomAuthErrorStack,
   CustomNavThridLevel,
-  CustomTextField
+  CustomTextField,
 } from "../../../utils/common-helper";
 import SucessToast from "@/components/toasts/SucessToast";
 import ErrorToast from "@/components/toasts/ErrorToast";
@@ -54,124 +54,88 @@ export default function Page() {
       email: Yup.string()
         .max(255)
         .required(commonValidationMessages?.required)
-        .email(commonValidationMessages?.email)
+        .email(commonValidationMessages?.email),
     }),
-    onSubmit: async (values, { setErrors }) => {
-      // Handle form submission
-      try {
-        setIsSubmitting(true);
-        const response = await forgotPassword(values, language_code);
-        if (response.status === 200) {
-          // toast.success(response?.data?.message);
-          SucessToast({ message: response?.data?.message });
-          setIsSubmitting(false);
-          setShowPasswordSuccess(true);
-        } else {
-          setIsSubmitting(false);
-          setShowPasswordSuccess(false);
-          // Handle other types of responses or errors here
-        }
-      } catch (error) {
-        // Handle network errors or any other exceptions here
-        setIsSubmitting(false);
-        setShowPasswordSuccess(false);
-        // toast.error(error?.response?.data?.message);
-        setToastError(error?.response?.data?.message);
-        const errors = {};
-        // Check if the error response contains data for the "email" field
-        if (error?.response?.data?.data?.email?.error) {
-          errors.email = error?.response?.data?.data?.email?.error;
-        }
-        setErrors(errors);
-        if (error?.response?.status === 401) {
-          navigate("/signin");
-        }
-      }
+    onSubmit: async () => {
     },
   });
   return (
     <Provider store={store}>
       <AuthLayout>
         {!showForgetPasswordSuccess ? (
-               <form noValidate onSubmit={formik.handleSubmit}>
+          <form noValidate onSubmit={formik.handleSubmit}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "24px",
+                p: "24px",
+                width: "384px",
+                maxHeight: "440px",
+                borderRadius: "10px",
+                boxShadow:
+                  "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+              }}
+            >
+              <Typography variant="h2">Forgot Password </Typography>
+              {toastError && (
+                <Box>
+                  <ErrorToast toastError={toastError} />
+                </Box>
+              )}
 
-              
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "24px",
-              p: "24px",
-              width: "384px",
-              maxHeight: "440px",
-              borderRadius: "10px",
-              boxShadow:
-                "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-            }}
-          >
-          
-            <Typography variant="h2">Forgot Password </Typography>
-            {toastError && (
-              <Box>
-                <ErrorToast toastError={toastError} />
-              </Box>
-            )}
-
-
-           
               <Typography>Enter your email to confirm.</Typography>
-         
-                <Stack spacing={1} mt={2}>
-                  <CustomLabelTypography>Email</CustomLabelTypography>
-                  <CustomTextField
-  fullWidth
-  id="email"
-  name="email"
-  variant="outlined"
-  onChange={formik.handleChange}
-  value={formik.values.email}
-  error={!!(formik.touched.email && formik.errors.email)}
-  onBlur={formik.handleBlur}
-  type="email"
-  placeholder="m@example.com"
-  // helperText={
-  //   formik.touched.email && formik.errors.email 
-  //     && (<FieldError error={formik.errors.email} />)
-  // }
 
-
-/>
-
-                  {formik?.touched.email && formik.errors.email && (
-                    <CustomAuthErrorStack sx={{ marginLeft: -2, display:"flex", alignItems:"center" ,mt:"8px"}}>
-                      <ErrorOutline
-                        sx={{
-                          width: "16px",
-                          height: "16px",
-                          
-                        }}
-                      />
-                      <CustomNavThridLevel sx={{ color: "#F12323" }}>
-                        {formik.errors.email}
-                      </CustomNavThridLevel>
-                    </CustomAuthErrorStack>
-                  )} 
-                </Stack>
-
-                <Button
-                  type="submit"
+              <Stack spacing={1} mt={2}>
+                <CustomLabelTypography>Email</CustomLabelTypography>
+                <CustomTextField
                   fullWidth
-                  variant="contained"
-                  sx={{ padding: "12px" }}
-                >
-                  <CustomButtonLabel>Confirm</CustomButtonLabel>
-                </Button>
-         
-           
+                  id="email"
+                  name="email"
+                  variant="outlined"
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                  error={!!(formik.touched.email && formik.errors.email)}
+                  onBlur={formik.handleBlur}
+                  type="email"
+                  placeholder="m@example.com"
+                  // helperText={
+                  //   formik.touched.email && formik.errors.email
+                  //     && (<FieldError error={formik.errors.email} />)
+                  // }
+                />
 
+                {formik?.touched.email && formik.errors.email && (
+                  <CustomAuthErrorStack
+                    sx={{
+                      marginLeft: -2,
+                      display: "flex",
+                      alignItems: "center",
+                      mt: "8px",
+                    }}
+                  >
+                    <ErrorOutline
+                      sx={{
+                        width: "16px",
+                        height: "16px",
+                      }}
+                    />
+                    <CustomNavThridLevel sx={{ color: "#F12323" }}>
+                      {formik.errors.email}
+                    </CustomNavThridLevel>
+                  </CustomAuthErrorStack>
+                )}
+              </Stack>
 
-
-          </Box>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ padding: "12px" }}
+              >
+                <CustomButtonLabel>Confirm</CustomButtonLabel>
+              </Button>
+            </Box>
           </form>
         ) : (
           <CustomAuthCard
