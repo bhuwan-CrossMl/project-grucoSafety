@@ -447,7 +447,7 @@ export default function Page() {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    onClick={() => navigate("/")}
+                    onClick={() => router.push("/auth/signin")}
                   >
                     <CustomButtonLabel>{t("Sign In")}</CustomButtonLabel>
                   </CustomButton>
