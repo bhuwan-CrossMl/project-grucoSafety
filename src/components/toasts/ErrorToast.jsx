@@ -1,3 +1,4 @@
+"use client"; 
 import { Box, Typography } from '@mui/material';
 import ErrorIcon from '@mui/icons-material/Error';
 import {

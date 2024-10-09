@@ -12,7 +12,7 @@ import {
   CircularProgress,
   Link,
   Tooltip,
-  Button
+  Button,
 } from "@mui/material";
 import {
   ErrorOutline,
@@ -103,8 +103,15 @@ export default function Page() {
     <Provider store={store}>
       <AuthLayout>
         {showInvalidPage ? (
-          <Box sx={{maxWidth: "384px",borderRadius:"10px" ,p:"24px" , boxShadow:
-            "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px", }}>
+          <Box
+            sx={{
+              maxWidth: "384px",
+              borderRadius: "10px",
+              p: "24px",
+              boxShadow:
+                "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+            }}
+          >
             <Box
               sx={{
                 display: "flex",
@@ -128,12 +135,12 @@ export default function Page() {
               <CustomTitle>Invalid Link</CustomTitle>
             </Box>
 
-            <Box >
+            <Box>
               <Typography variant="body1">
                 `Apologies, the link is either not found or expired. For
                 assistance, contact`{" "}
                 <Link href="mailto:support@gruco.com" variant="body1">
-                Support.
+                  Support.
                 </Link>{" "}
               </Typography>
               <CustomButton
@@ -149,25 +156,23 @@ export default function Page() {
         ) : (
           <>
             {!paswordSuccess ? (
-                  <form noValidate onSubmit={formik.handleSubmit}>
-              <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap:"16px",
-                  marginTop: "45px", 
-                  maxWidth: "384px",
-                  minWidth: "384px",
-                  p:"24px",
-                  boxShadow:
-                  "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
-                  borderRadius: "10px",
-                }}
-              >
-              
+              <form noValidate onSubmit={formik.handleSubmit}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "16px",
+                    marginTop: "45px",
+                    maxWidth: "384px",
+                    minWidth: "384px",
+                    p: "24px",
+                    boxShadow:
+                      "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <Typography variant="h1">Password Reset</Typography>
 
-                     <Typography variant="h1">Password Reset</Typography>
-            
                   <Typography variant="body1">
                     Enter your email to confirm.
                   </Typography>
@@ -176,249 +181,243 @@ export default function Page() {
                       <ErrorToast toastError={toastError} />
                     </Box>
                   )}
-                
-                    <Stack spacing={1} mt={2}>
-                      <CustomLabelTypography>Email</CustomLabelTypography>
-                      <CustomTextField
-                        fullWidth
-                        id="email"
-                        name="email"
-                        variant="outlined"
-                        onChange={formik.handleChange}
-                        value={formik.values.email}
-                        error={!!(formik.touched.email && formik.errors.email)}
-                        onBlur={formik.handleBlur}
-                        type="email"
-                        placeholder="m@example.com"
-                        disabled={true}
-                      />
-                    </Stack>
 
-                    <Stack spacing={1} mt={2}>
-                      <CustomLabelTypography>
-                        New password
-                      </CustomLabelTypography>
-                      <CustomTextField
-                        fullWidth
-                        id="new_password"
-                        name="new_password"
-                        variant="outlined"
-                        onChange={formik.handleChange}
-                        value={formik.values.new_password}
-                        error={
-                          !!(
-                            formik.touched.new_password &&
-                            formik.errors.new_password
-                          )
-                        }
-                        onBlur={formik.handleBlur}
-                        type={showPassword ? "text" : "password"} // Toggle password visibility
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Tooltip
-                                title={
-                                  showPassword
-                                    ? "Hide Password"
-                                    : "Show Password"
-                                }
-                                componentsProps={{
-                                  tooltip: {
-                                    sx: {
-                                      bgcolor: "#DFDFDF",
-                                      color: "#505050",
-                                      padding: "4px, 8px, 4px, 8px",
-                                      fontFamily: "Roboto",
-                                      fontWeight: 400,
-                                      fontSize: "14px",
-                                      lineHeight: "21px",
-                                      marginRight: "70px",
-                                    },
+                  <Stack spacing={1} mt={2}>
+                    <CustomLabelTypography>Email</CustomLabelTypography>
+                    <CustomTextField
+                      fullWidth
+                      id="email"
+                      name="email"
+                      variant="outlined"
+                      onChange={formik.handleChange}
+                      value={formik.values.email}
+                      error={!!(formik.touched.email && formik.errors.email)}
+                      onBlur={formik.handleBlur}
+                      type="email"
+                      placeholder="m@example.com"
+                      disabled={true}
+                    />
+                  </Stack>
+
+                  <Stack spacing={1} mt={2}>
+                    <CustomLabelTypography>New password</CustomLabelTypography>
+                    <CustomTextField
+                      fullWidth
+                      id="new_password"
+                      name="new_password"
+                      variant="outlined"
+                      onChange={formik.handleChange}
+                      value={formik.values.new_password}
+                      error={
+                        !!(
+                          formik.touched.new_password &&
+                          formik.errors.new_password
+                        )
+                      }
+                      onBlur={formik.handleBlur}
+                      type={showPassword ? "text" : "password"} // Toggle password visibility
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Tooltip
+                              title={
+                                showPassword ? "Hide Password" : "Show Password"
+                              }
+                              componentsProps={{
+                                tooltip: {
+                                  sx: {
+                                    bgcolor: "#DFDFDF",
+                                    color: "#505050",
+                                    padding: "4px, 8px, 4px, 8px",
+                                    fontFamily: "Roboto",
+                                    fontWeight: 400,
+                                    fontSize: "14px",
+                                    lineHeight: "21px",
+                                    marginRight: "70px",
                                   },
-                                }}
+                                },
+                              }}
+                            >
+                              <IconButton
+                                onClick={handleClickShowPassword}
+                                edge="end"
+                                style={{ backgroundColor: "transparent" }}
                               >
-                                <IconButton
-                                  onClick={handleClickShowPassword}
-                                  edge="end"
-                                  style={{ backgroundColor: "transparent" }}
-                                >
-                                  {showPassword ? (
-                                    <VisibilityOffOutlined
-                                      sx={{ color: "#000000" }}
-                                    />
-                                  ) : (
-                                    <VisibilityOutlined
-                                      sx={{ color: "#000000" }}
-                                    />
-                                  )}
-                                </IconButton>
-                              </Tooltip>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
+                                {showPassword ? (
+                                  <VisibilityOffOutlined
+                                    sx={{ color: "#000000" }}
+                                  />
+                                ) : (
+                                  <VisibilityOutlined
+                                    sx={{ color: "#000000" }}
+                                  />
+                                )}
+                              </IconButton>
+                            </Tooltip>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
 
-                      {formik.touched.new_password &&
-                        formik.errors.new_password && (
-                          <CustomAuthErrorStack
+                    {formik.touched.new_password &&
+                      formik.errors.new_password && (
+                        <CustomAuthErrorStack
+                          sx={{
+                            marginLeft: -2,
+                            marginBottom:
+                              formik.errors.new_password && "22px !important",
+                          }}
+                        >
+                          <ErrorOutline
                             sx={{
-                              marginLeft: -2,
-                              marginBottom:
-                                formik.errors.new_password && "22px !important",
+                              width: "16px",
+                              height: "16px",
                             }}
-                          >
-                            <ErrorOutline
+                          />
+                          {formik.errors.new_password}
+                        </CustomAuthErrorStack>
+                      )}
+
+                    <Stack spacing={2}>
+                      {Object?.entries(
+                        checkPasswordStrength(formik.values.new_password)
+                      ).map(([key, value]) => (
+                        <Typography
+                          key={key}
+                          variant="body2"
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            backgroundColor: value
+                              ? "#CCECCC"
+                              : formik.values.new_password
+                              ? "#FCD3D3"
+                              : "#F2F2F2", // Green for met, Red for not met and typed, Gray for not typed
+                            color: value
+                              ? "#028002"
+                              : formik.values.new_password
+                              ? "#F12323"
+                              : "#797979", // Change to dark gray for the starting text
+                            padding: "4px 8px",
+                            borderRadius: "4px",
+                            mt: "10px",
+                          }}
+                        >
+                          {value ? (
+                            <CheckCircleOutline
+                              fontSize="small"
                               sx={{
-                                width: "16px",
-                                height: "16px",
+                                color: "#028002",
+                                marginRight: 1,
+                                fontSize: "16px",
                               }}
                             />
-                            {formik.errors.new_password}
-                          </CustomAuthErrorStack>
-                        )}
-
-                      <Stack spacing={2}>
-                        {Object?.entries(
-                          checkPasswordStrength(formik.values.new_password)
-                        ).map(([key, value]) => (
-                          <Typography
-                            key={key}
-                            variant="body2"
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              backgroundColor: value
-                                ? "#CCECCC"
-                                : formik.values.new_password
-                                ? "#FCD3D3"
-                                : "#F2F2F2", // Green for met, Red for not met and typed, Gray for not typed
-                              color: value
-                                ? "#028002"
-                                : formik.values.new_password
-                                ? "#F12323"
-                                : "#797979", // Change to dark gray for the starting text
-                              padding: "4px 8px",
-                              borderRadius: "4px",
-                              mt:"10px"
-                            }}
-                          >
-                            {value ? (
-                              <CheckCircleOutline
-                                fontSize="small"
-                                sx={{
-                                  color: "#028002",
-                                  marginRight: 1,
-                                  fontSize: "16px",
-                                }}
-                              />
-                            ) : !formik.values.new_password ? (
-                              <PanoramaFishEye
-                                fontSize="small"
-                                sx={{
-                                  color: "#7B7B7B",
-                                  marginRight: 1,
-                                  fontSize: "16px",
-                                }}
-                              />
-                            ) : (
-                              <ErrorOutline
-                                fontSize="small"
-                                sx={{
-                                  color: "#F12323",
-                                  marginRight: 1,
-                                  fontSize: "16px",
-                                }}
-                              />
-                            )}
-                            {passwordStrengthLabels[key]}
-                          </Typography>
-                        ))}
-                      </Stack>
-                    </Stack>
-
-                    <Stack spacing={1} mt={3}>
-                      <CustomLabelTypography>
-                        Confirm password
-                      </CustomLabelTypography>
-                      <CustomTextField
-                        fullWidth
-                        id="confirm_password"
-                        name="confirm_password"
-                        type={showConfirmPassword ? "text" : "password"}
-                        variant="outlined"
-                        onChange={formik.handleChange}
-                        value={formik.values.confirm_password}
-                        error={
-                          !!(
-                            formik.touched.confirm_password &&
-                            formik.errors.confirm_password
-                          )
-                        }
-                        onBlur={formik.handleBlur}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Tooltip
-                                title={
-                                  showConfirmPassword
-                                    ? "Hide Password"
-                                    : "Show Password"
-                                }
-                                componentsProps={{
-                                  tooltip: {
-                                    sx: {
-                                      bgcolor: "#DFDFDF",
-                                      color: "#505050",
-                                      padding: "4px, 8px, 4px, 8px",
-                                      fontFamily: "Roboto",
-                                      fontWeight: 400,
-                                      fontSize: "14px",
-                                      lineHeight: "21px",
-                                      marginRight: "70px",
-                                    },
-                                  },
-                                }}
-                              >
-                                <IconButton
-                                  onClick={handleClickShowConfirmPassword}
-                                  edge="end"
-                                  style={{ backgroundColor: "transparent" }}
-                                >
-                                  {showConfirmPassword ? (
-                                    <VisibilityOffOutlined
-                                      sx={{ color: "#000000" }}
-                                    />
-                                  ) : (
-                                    <VisibilityOutlined
-                                      sx={{ color: "#000000" }}
-                                    />
-                                  )}
-                                </IconButton>
-                              </Tooltip>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      {formik.touched.confirm_password &&
-                        formik.errors.confirm_password && (
-                          <CustomAuthErrorStack sx={{ marginLeft: -2 }}>
-                            <ErrorOutline
+                          ) : !formik.values.new_password ? (
+                            <PanoramaFishEye
+                              fontSize="small"
                               sx={{
-                                width: "16px",
-                                height: "16px",
+                                color: "#7B7B7B",
+                                marginRight: 1,
+                                fontSize: "16px",
                               }}
                             />
-                            {formik.errors.confirm_password}
-                          </CustomAuthErrorStack>
-                        )}
+                          ) : (
+                            <ErrorOutline
+                              fontSize="small"
+                              sx={{
+                                color: "#F12323",
+                                marginRight: 1,
+                                fontSize: "16px",
+                              }}
+                            />
+                          )}
+                          {passwordStrengthLabels[key]}
+                        </Typography>
+                      ))}
                     </Stack>
+                  </Stack>
 
-                    <CustomButton type="submit" fullWidth variant="contained" >
-                      Reset
-                    </CustomButton>
-                
-            
-              </Box>
+                  <Stack spacing={1} mt={3}>
+                    <CustomLabelTypography>
+                      Confirm password
+                    </CustomLabelTypography>
+                    <CustomTextField
+                      fullWidth
+                      id="confirm_password"
+                      name="confirm_password"
+                      type={showConfirmPassword ? "text" : "password"}
+                      variant="outlined"
+                      onChange={formik.handleChange}
+                      value={formik.values.confirm_password}
+                      error={
+                        !!(
+                          formik.touched.confirm_password &&
+                          formik.errors.confirm_password
+                        )
+                      }
+                      onBlur={formik.handleBlur}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Tooltip
+                              title={
+                                showConfirmPassword
+                                  ? "Hide Password"
+                                  : "Show Password"
+                              }
+                              componentsProps={{
+                                tooltip: {
+                                  sx: {
+                                    bgcolor: "#DFDFDF",
+                                    color: "#505050",
+                                    padding: "4px, 8px, 4px, 8px",
+                                    fontFamily: "Roboto",
+                                    fontWeight: 400,
+                                    fontSize: "14px",
+                                    lineHeight: "21px",
+                                    marginRight: "70px",
+                                  },
+                                },
+                              }}
+                            >
+                              <IconButton
+                                onClick={handleClickShowConfirmPassword}
+                                edge="end"
+                                style={{ backgroundColor: "transparent" }}
+                              >
+                                {showConfirmPassword ? (
+                                  <VisibilityOffOutlined
+                                    sx={{ color: "#000000" }}
+                                  />
+                                ) : (
+                                  <VisibilityOutlined
+                                    sx={{ color: "#000000" }}
+                                  />
+                                )}
+                              </IconButton>
+                            </Tooltip>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    {formik.touched.confirm_password &&
+                      formik.errors.confirm_password && (
+                        <CustomAuthErrorStack sx={{ marginLeft: -2 }}>
+                          <ErrorOutline
+                            sx={{
+                              width: "16px",
+                              height: "16px",
+                            }}
+                          />
+                          {formik.errors.confirm_password}
+                        </CustomAuthErrorStack>
+                      )}
+                  </Stack>
+
+                  <CustomButton type="submit" fullWidth variant="contained">
+                    Reset
+                  </CustomButton>
+                </Box>
               </form>
             ) : (
               <CustomAuthCard sx={{ marginTop: "129px", maxWidth: "384px" }}>

@@ -56,8 +56,7 @@ export default function Page() {
         .required(commonValidationMessages?.required)
         .email(commonValidationMessages?.email),
     }),
-    onSubmit: async () => {
-    },
+    onSubmit: async () => {},
   });
   return (
     <Provider store={store}>
